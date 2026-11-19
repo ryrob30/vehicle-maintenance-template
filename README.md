@@ -8,10 +8,10 @@ How to stand up this project for your own vehicle(s). Full agent behavior lives 
 
 ```
 your-project/
-├── AGENTS.md            # agent instructions
-├── vehicles/             # one profile per vehicle: specs, mileage, etc
-├── maintenance-log/       # one running log per vehicle
-├── manuals/               # owner's/service manual PDFs, one subfolder per vehicle
+├── AGENTS.md               # agent instructions
+├── vehicles/               # one profile per vehicle: specs, mileage, etc
+├── maintenance-log/        # one running log per vehicle
+├── manuals/                # owner's/service manual PDFs, one subfolder per vehicle
 ├── reference/              # TSBs, wiring diagrams, door-tag photos, VIN decode exports
 ├── obd-exports/            # OBD-II scanner data when provided
 ├── sources/                # agent-maintained source catalog

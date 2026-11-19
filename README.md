@@ -8,15 +8,15 @@ How to stand up this project for your own vehicle(s). Full agent behavior lives 
 
 ```
 your-project/
-├── AGENTS.md            # agent instructions (copy from this repo, edit vehicle list)
-├── vehicles/             # one profile per vehicle: specs, mileage, fluids, quirks
-├── maintenance-log/       # one running log per vehicle: completed work only
+├── AGENTS.md            # agent instructions
+├── vehicles/             # one profile per vehicle: specs, mileage, etc
+├── maintenance-log/       # one running log per vehicle
 ├── manuals/               # owner's/service manual PDFs, one subfolder per vehicle
 ├── reference/              # TSBs, wiring diagrams, door-tag photos, VIN decode exports
-├── obd-exports/            # OBD-II scanner data drops here when you have it (can start empty)
-├── sources/                # agent-maintained catalog: what source backs each answer
-├── intake/                 # drop new files here unfiled; agent renames/sorts them
-└── templates/              # blank vehicle-profile and maintenance-log templates
+├── obd-exports/            # OBD-II scanner data when provided
+├── sources/                # agent-maintained source catalog
+├── intake/                 # drop new files here unfiled; then ask agent to rename/sort them
+└── templates/              # blank profile and maintenance templates
 ```
 
 Create one subfolder per vehicle under `manuals/` and `reference/`, named consistently (e.g. `sample_sedan`).
@@ -25,14 +25,13 @@ Create one subfolder per vehicle under `manuals/` and `reference/`, named consis
 
 ## 2. Per-vehicle setup steps
 
-1. **Collect the door tag / VIN plate photo.** Driver's door jamb sticker (or glovebox/frame on some trucks). Drop it in `intake/` and ask the agent to file it (or save directly to `reference/<vehicle>/<Make>-<Model>-<Year>-Door-Jamb-Label.jpg`). Gives GVWR/GAWR, tire pressures, paint/trim codes, build date.
-2. **Decode the VIN via NHTSA.** Free, official, no login. Two options — pick whichever is convenient:
-   - **Browser:** go to **https://vpic.nhtsa.dot.gov/decoder/**, enter the VIN, confirm model year, export the result as CSV — drop it in `intake/` for the agent to file, or save directly to `reference/<vehicle>/NHTSA-VIN-Decode.csv`.
-   - **Have the agent pull it via API:** ask the agent to fetch `https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValuesExtended/<VIN>?format=json` and save the result to `reference/<vehicle>/NHTSA-VIN-Decode.csv` (or `.json`). Same NHTSA data either way — no API key required.
-3. **Get the owner's manual PDF** (and service manual if available). Drop it in `intake/` for the agent to file, or save directly to `manuals/<vehicle>/`.
+1. **Collect the door tag / VIN plate photo.** Driver's door jamb sticker. Drop it in `intake/` and ask the agent to file it. Gives GVWR/GAWR, tire pressures, paint/trim codes, build date.
+2. **Decode the VIN via NHTSA.** Free, official, no login. Two options — pick your preference:
+   - **Browser:** go to **https://vpic.nhtsa.dot.gov/decoder/**, enter the VIN, confirm model year, export the full result as CSV — drop it in `intake/` for the agent to file.
+   - **Have the agent pull it via API:** ask the agent to fetch `https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValuesExtended/<VIN>?format=json` and save the result to reference folder for that vehicle.
+3. **Get the owner's manual PDF** (and service manual if available). Drop it in `intake/` ask the agent to file it.
 4. **Copy the blank templates** from `templates/` into `vehicles/<vehicle>.md` and `maintenance-log/<vehicle>.md`; fill in from the VIN decode + door tag + what you know. (`vehicles/sample_sedan.md` and `sample_truck.md` are filled-in dummy *examples* of the finished result, not blank forms — delete them once you've added your own vehicles.)
-5. **Ask the agent to add a `sources/<vehicle>.md` entry** for each source above (what it is, where it lives, publisher, date). This file is agent-maintained — you generally won't write it by hand, just confirm/correct what the agent records.
-6. Repeat for each additional vehicle; update the vehicle table in `AGENTS.md`.
+5. Repeat for each vehicle; update the vehicle table in `AGENTS.md`.
 
 ## 3. Suggested starter assets per vehicle
 
